@@ -7,19 +7,31 @@ func TestSum(t *testing.T) {
 		input := []int{1,2,3,4,5}
 		got := Sum(input)
 		expected := 15
-		if got != expected {
-			t.Errorf("Expected '%d' but got '%d' input %v", expected, got, input)
-		}
+		assertionHelperSum(t,got, expected, input)
 	})
 
 	t.Run("Sum can accept a dynamic number of elements", func(t *testing.T) {
 		input := []int{1,2,3}
 		got := Sum(input)
 		expected := 6
-		if got != expected {
-			t.Errorf("Expected '%d' but got '%d' input '%v'", expected, got, input)
-		}
+		assertionHelperSum(t,got, expected, input)
 	})
+}
+
+// func TestSumAll(t *testing.T) {
+// 	t.Run("SumAll should return the correct sum of all the slices", func(t *testing.T) {
+// 		input := [][]int{[]int{1,2,3}, []int{1,2,3,4,5}}
+// 		got := SumAll()
+// 		expected := []int{6,15}
+		
+// 	})
+// }
+
+func assertionHelperSum(t testing.TB, got, expected int, input []int) {
+	t.Helper()
+	if got != expected {
+		t.Errorf("Expected '%d' but got '%d' input '%v'", expected, got, input)
+	}
 }
 
 func BenchmarkSum(b *testing.B) {
