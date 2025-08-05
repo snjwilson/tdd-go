@@ -1,6 +1,9 @@
 package arraysandslices
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestSum(t *testing.T) {
 	t.Run("Sum returns the sum of all the elements in the collection", func(t *testing.T) {
@@ -18,19 +21,34 @@ func TestSum(t *testing.T) {
 	})
 }
 
-// func TestSumAll(t *testing.T) {
-// 	t.Run("SumAll should return the correct sum of all the slices", func(t *testing.T) {
-// 		input := [][]int{[]int{1,2,3}, []int{1,2,3,4,5}}
-// 		got := SumAll()
-// 		expected := []int{6,15}
-		
-// 	})
-// }
+func TestSumAll(t *testing.T) {
+	t.Run("SumAll should return the correct sum of all the slices", func(t *testing.T) {
+		got := SumAll([]int{1,2,3}, []int{1,2,3,4,5})
+		expected := []int{6,15}
+		assertionHelperSumAll(t, got, expected)
+	})
+}
+
+func TestSumAllTrail(t *testing.T) {
+	t.Run("SumAll should return the correct sum of all the trail of the slices", func(t *testing.T) {
+		got := SumAllTrail([]int{1,2,3}, []int{1,2,3,4,5})
+		expected := []int{5,14}
+		assertionHelperSumAll(t, got, expected)
+	})
+}
+
 
 func assertionHelperSum(t testing.TB, got, expected int, input []int) {
 	t.Helper()
 	if got != expected {
 		t.Errorf("Expected '%d' but got '%d' input '%v'", expected, got, input)
+	}
+}
+
+func assertionHelperSumAll(t testing.TB, got, expected []int) {
+	t.Helper()
+	if !reflect.DeepEqual(got, expected) {
+		t.Errorf("got %v expected %v", got, expected)
 	}
 }
 
