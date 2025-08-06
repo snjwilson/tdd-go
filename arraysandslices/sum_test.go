@@ -31,7 +31,7 @@ func TestSumAll(t *testing.T) {
 
 func TestSumAllTrail(t *testing.T) {
 	t.Run("SumAll should return the correct sum of all the trail of the slices", func(t *testing.T) {
-		got := SumAllTrail([]int{1,2,3}, []int{1,2,3,4,5})
+		got := SumAllTail([]int{1,2,3}, []int{1,2,3,4,5})
 		expected := []int{5,14}
 		assertionHelperSumAll(t, got, expected)
 	})
