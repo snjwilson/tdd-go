@@ -22,8 +22,12 @@ func SumAll(collections ...[]int) []int {
 func SumAllTail(collections ...[]int) []int {
 	var final []int
 	for _,arr := range collections {
-		arr = arr[1:]
-		final = append(final, Sum(arr))
+		if len(arr) == 0 {
+			final = append(final, 0)
+		} else {
+			arr = arr[1:]
+			final = append(final, Sum(arr))
+		}
 	}
 	return final
 }

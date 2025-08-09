@@ -29,10 +29,16 @@ func TestSumAll(t *testing.T) {
 	})
 }
 
-func TestSumAllTrail(t *testing.T) {
-	t.Run("SumAll should return the correct sum of all the trail of the slices", func(t *testing.T) {
+func TestSumAllTail(t *testing.T) {
+	t.Run("SumAllTail should return the correct sum of all the trail of the slices", func(t *testing.T) {
 		got := SumAllTail([]int{1,2,3}, []int{1,2,3,4,5})
 		expected := []int{5,14}
+		assertionHelperSumAll(t, got, expected)
+	})
+
+	t.Run("SumAllTail should return the correct sum when an empty array is passed", func(t *testing.T) {
+		got := SumAllTail([]int{}, []int{1,2,3,4,5})
+		expected := []int{0,14}
 		assertionHelperSumAll(t, got, expected)
 	})
 }
