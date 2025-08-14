@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"reflect"
 	"testing"
+	"time"
 )
 
 type SpyCountdownOps struct {
@@ -45,4 +46,22 @@ Go!`
 			t.Errorf("expected %v got %v", want, spy.Calls)
 		}
 	})
+}
+
+type SpyTime struct {
+	Duration time.Duration
+}
+
+func (s *SpyTime) SetDurationSlept(t time.Duration) {
+	s.Duration = t
+}
+
+func TestConfigurableSleeper(t *testing.T) {
+	sleepDuration := time.Second*5
+	spy := &SpyTime{}
+	sleeper := &ConfigurableSleeper{sleepDuration, spy.SetDurationSlept}
+	sleeper.Sleep()
+	if spy.Duration != sleepDuration {
+		t.Errorf("expected %v got %v", sleepDuration, spy.Duration)
+	}
 }
